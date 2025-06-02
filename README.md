@@ -2,75 +2,79 @@
 
 ## Overview
 
-This is a Quiz Application API built with ASP.NET Core 8.0. The API provides endpoints for managing quizzes, questions, and user interactions with quizzes.
+This is a Quiz Application API built with ASP.NET Core 8.0. The API provides endpoints for managing quizzes, questions, and quiz attempts.
 
 ### Features
 
-- Quiz management (CRUD operations)
-- Question management with multiple choice answers
-- Quiz taking functionality
+- Quiz listing with pagination and sorting
+- Quiz details retrieval
+- Question management for quizzes
+- Quiz attempt functionality
 - Answer submission and scoring
-- User progress tracking
+- Detailed quiz results with explanations
 
 ### API Endpoints
 
 #### Quiz Management
 
-- `GET /api/quiz/list` - Get list of all quizzes
-- `GET /api/quiz/get/{id}` - Get quiz details by ID
-- `POST /api/quiz/create` - Create a new quiz
-- `PUT /api/quiz/update` - Update an existing quiz
-- `DELETE /api/quiz/delete/{id}` - Delete a quiz
-
-#### Question Management
-
-- `GET /api/question/list` - Get list of all questions
-- `GET /api/question/get/{id}` - Get question details by ID
-- `POST /api/question/create` - Create a new question
-- `PUT /api/question/update` - Update an existing question
-- `DELETE /api/question/delete/{id}` - Delete a question
+- `GET /api/quiz` - Get list of quizzes with pagination and sorting
+  - Query parameters:
+    - page (default: 1)
+    - pageSize (default: 10, max: 50)
+    - sortBy (default: "CreatedAt")
+    - ascending (default: true)
+- `GET /api/quiz/{id}` - Get quiz details by ID
+- `GET /api/quiz/{quizId}/questions` - Get all questions for a specific quiz
 
 #### Quiz Taking
 
-- `POST /api/quiz/start` - Start a new quiz session
-- `POST /api/quiz/answer` - Submit an answer for a question
-- `GET /api/quiz/submit-answers` - Submit all answers and get results
+- `POST /api/quiz/quiz-attempt` - Start a new quiz attempt
+- `POST /api/quiz/attempts/{quizAttemptId}/answers` - Submit an answer for a question
+- `GET /api/quiz/attempts/{quizAttemptId}/result` - Submit quiz and get detailed results
 
 ### Data Models
 
 #### Quiz
 
-- Id (int)
+- QuizId (int)
 - Title (string)
-- Description (string)
-- TimeLimit (int) - in minutes
-- CreatedAt (DateTime)
-- UpdatedAt (DateTime)
+- DescriptionQuiz (string)
+- PassingScorePercent (decimal)
+- TimeLimitMinutes (int)
 
 #### Question
 
-- Id (int)
+- QuestionId (int)
 - QuizId (int)
 - QuestionText (string)
-- Options (List<string>)
-- CorrectAnswer (int)
-- CreatedAt (DateTime)
-- UpdatedAt (DateTime)
+- QuestionOrder (int)
+- TimeAllowedSeconds (int)
+- Explain (string)
 
-#### QuizSession
+#### AnswerOption
 
-- Id (int)
+- AnswerOptionId (int)
+- QuestionId (int)
+- AnswerText (string)
+- IsCorrect (boolean)
+
+#### QuizAttempt
+
+- QuizAttemptId (Guid)
 - QuizId (int)
-- UserId (int)
 - StartTime (DateTime)
-- EndTime (DateTime)
-- Score (int)
-- Status (string)
+- EndTime (DateTime?)
+- TotalCorrect (int)
+- Passed (boolean)
+
+#### UserAnswer
+
+- QuizAttemptId (Guid)
+- QuestionId (int)
+- AnswerOptionId (int)
 
 ### Technologies Used
 
 - ASP.NET Core 8.0
 - Entity Framework Core
 - SQL Server
-- AutoMapper
-- Swagger/OpenAPI
