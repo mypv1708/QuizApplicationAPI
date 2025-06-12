@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuizApplicationAPI.Data;
 using QuizApplicationAPI.DTOs.Request;
+using QuizApplicationAPI.DTOs.Response.Answer;
+using QuizApplicationAPI.DTOs.Response.Quiz;
 using QuizApplicationAPI.DTOs.Responsse;
 using QuizApplicationAPI.Models;
 

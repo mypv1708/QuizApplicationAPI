@@ -7,19 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="DTOs\Response\NewFolder\**" />
     <Compile Remove="Helpers\**" />
     <Compile Remove="Repositories\**" />
     <Compile Remove="Services\**" />
-    <Content Remove="DTOs\Response\NewFolder\**" />
     <Content Remove="Helpers\**" />
     <Content Remove="Repositories\**" />
     <Content Remove="Services\**" />
-    <EmbeddedResource Remove="DTOs\Response\NewFolder\**" />
     <EmbeddedResource Remove="Helpers\**" />
     <EmbeddedResource Remove="Repositories\**" />
     <EmbeddedResource Remove="Services\**" />
-    <None Remove="DTOs\Response\NewFolder\**" />
     <None Remove="Helpers\**" />
     <None Remove="Repositories\**" />
     <None Remove="Services\**" />

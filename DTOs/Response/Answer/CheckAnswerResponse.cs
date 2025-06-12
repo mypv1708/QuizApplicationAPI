@@ -1,4 +1,4 @@
-namespace QuizApplicationAPI.DTOs.Responsse
+namespace QuizApplicationAPI.DTOs.Response.Answer
 {
     public class CheckAnswerResponse
     {
